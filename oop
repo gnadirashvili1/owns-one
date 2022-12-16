@@ -1,0 +1,123 @@
+class AbstractPhone {
+    protected:
+        string ModelName;
+        string Manufacturer;
+        int YearReleased;
+        
+    public:
+        static int PhoneCount;
+        
+        AbstractPhone(string ModelName, string Manufacturer,int YearReleased) {
+            this -> ModelName = ModelName;
+            this -> Manufacturer = Manufacturer;
+            this -> YearReleased = YearReleased;
+            PhoneCount++;
+        }
+        
+        string getModelName() {
+            return ModelName;
+        }
+        
+        void setModelName(string ModelName) {
+            this-> ModelName = ModelName;
+        }
+        
+        string getManufacturer() {
+            return Manufacturer;
+        }
+        
+        void setManufacturer (string Manufacturer) {
+            this->Manufacturer = Manufacturer;
+        }
+        
+        int getYearReleased(){
+            return YearReleased;
+        }
+        
+        void setYearReleased(int YearReleased) {
+            this->YearReleased = YearReleased;
+        }
+        
+        void call() {
+            cout << "Abstract phone is calling... " << endl;
+        }
+        
+        void ReceiveCall() {
+            cout << "Abstract phone is receiving call..." << endl;
+        }
+        
+        virtual void CameraPress()=0;
+        
+        void ConnectToWifi() {
+            cout << "Abstract phone is connecting wifi..." << endl;
+        }
+};
+
+int AbstractPhone::PhoneCount = 0;
+
+class SamsungPhone: public AbstractPhone {
+    public:
+        SamsungPhone(string ModelName, int YearReleased): AbstractPhone(ModelName, "Samsung", YearReleased) {}
+        
+        void CameraPress() {
+            //complex logic for Camera
+            
+            cout << "Camera click on samsung phone" << endl;
+        }
+        
+        void CameraPress(string cameraMode) {
+            cout << "Camers press in" << cameraMode << "mode" << endl;
+        }
+};
+
+class ApplePhone: public AbstractPhone {
+    public:
+        ApplePhone(string ModelName, int YearReleased): AbstractPhone(ModelName, "Apple", YearReleased) {}
+    
+        void CameraPress() {
+             //complex logic for Camera
+            
+            cout << "Camera click on apple phone" << endl;
+        }
+        
+        void CameraPress(string cameraMode) {
+            cout << "Camers press in" << cameraMode << "mode" << endl;
+        }
+    
+};
+
+class OnlineShop {
+    string Name;
+    
+    public:
+        static int SoldPhoneCount;
+        
+        OnlineShop(string Name) {
+            this-> Name = Name;
+        }
+        
+        string getName() {
+            return Name;
+        }
+        
+        void setName(string Name) {
+            this-> Name = Name;
+        }
+        
+        void sellPhone() {
+            cout << "Online shop sold phone to costumer" << endl;
+            SoldPhoneCount++;
+        }
+        
+        void sellPhone(SamsungPhone phone) {
+            cout << "online shop sold" << phone.getManufacturer() << " " << phone.getModelName() << "to costumer" << endl;
+            SoldPhoneCount++;
+        }
+        
+        void sellPhone(ApplePhone phone) {
+            cout << "online shop sold" << phone.getManufacturer() << " " << phone.getModelName() << "to costumer" << endl;
+            SoldPhoneCount++;
+        }
+};
+
+int OnlineShop::SoldPhoneCount = 0;
