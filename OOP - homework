@@ -1,0 +1,125 @@
+class AbstractConsole {
+    protected:
+        string ProductName;
+        string Company;
+        int Price;
+        int Year;
+    
+    public:
+       static int ConsoleCount;
+       
+       AbstractConsole(string ProductName, string Company, int Price, int Year) {
+           this-> ProductName = ProductName;
+           this-> Company = Company;
+           this-> Price = Price;
+           this-> Year = Year;
+           ConsoleCount++;
+       }
+       
+       string getProductName() {
+           return ProductName;
+       }
+      
+       void setProductName(string ProductName) {
+           this-> ProductName = ProductName;
+       }
+       
+       string getCompany() {
+           return Company;
+       }
+       
+       void setCompany(string Company) {
+           this-> Company = Company;
+       }
+       
+       int getPrice() {
+           return Price;
+       }
+       
+       void setPrice(int Price) {
+           this-> Price = Price;
+       }
+       
+       int getYear() {
+           return Year;
+       }
+       
+       void setYear(int Year) {
+           this-> Year = Year;
+       }
+       
+       void PressBottom() {
+           cout << "Press bottom to turn on" << endl;
+       }
+       
+       void ConnectToWIFI() {
+           cout << "Console connect to wifi" << endl;
+       }
+       
+       void InputDisc() {
+           cout << "Insert disc and start playing" << endl;
+       }
+       
+       virtual void ConnectController() = 0;
+};
+
+int AbstractConsole::ConsoleCount = 0;
+
+class ConsolePS: public AbstractConsole {
+    public:
+        ConsolePS(string ProductName, int Price, int Year): AbstractConsole(ProductName, "SONY", Price, Year) {}
+    
+        void ConnectController() {
+            //turn bluetooth
+            cout << "Controller connect to console" << endl;
+        }
+        
+};
+
+class ConsoleXbox: public AbstractConsole {
+    public:
+       ConsoleXbox(string ProductName, int Price, int Year): AbstractConsole(ProductName, "Microsoft", Price, Year) {}
+       
+       void ConnectController() {
+           //turn bluetooth
+            cout << "Controller connect to console" << endl;
+       }
+};
+
+class techShop {
+    private:
+        string Name;
+        
+    public:
+        static int SoldConsols;
+        
+        techShop(string Name) {
+            this-> Name = Name;
+        }
+        
+        string getName() {
+            return Name;
+        }
+        
+        void setName(string Name) {
+            this-> Name = Name;
+        }
+            
+        
+        void sellConsole() {
+            cout << "Tech shop sold consols to costumers" << endl;
+            SoldConsols++; 
+        }
+        
+        void sellConsole(ConsolePS console) {
+            cout << "Tech shop sold " << console.getCompany() << "  " << console.getProductName() << " to costumer " << endl;
+            SoldConsols++;
+        }
+        
+        void sellConsole(ConsoleXbox console) {
+            cout << "Tech shop sold " << console.getCompany() << "  " << console.getProductName() << " to costumer " << endl;
+            SoldConsols++;
+        }
+};
+
+int techShop::SoldConsols =0;
